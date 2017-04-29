@@ -86,9 +86,9 @@ publishing {
             }
 
             // Add docs JAR
-            artifact docsJar {
-                classifier "javadoc"
-            }
+            //artifact docsJar {
+            //    classifier "javadoc"
+            //}
 
             // Populate the pom file
             pom.withXml {
@@ -425,9 +425,9 @@ task sourceJar(type: Jar) {
     }
 }
 
-task docsJar(type: Jar) {
-    from doxygen
-}
+//task docsJar(type: Jar) {
+//    from doxygen
+//}
 
 
 // ****************************** DISTRIBUTION ******************************
@@ -438,21 +438,6 @@ distributions {
             into('lib') {
                 from(jar)
                 from(configurations.runtime)
-            }
-            into('doc') {
-                if (project.hasProperty('buildDocs')) {
-                    from(doxygen) {
-                        include 'html/**'
-                    }
-                }
-                from('src/main/docs') {
-                    include 'examples/**'
-                }
-                from('.') {
-                    include 'README.md'
-                    include 'LICENSE.md'
-                    include 'NOTICE'
-                }
             }
             // Contents is also included in the JNI section above,
             // with `tasks.whenTaskAdded`
